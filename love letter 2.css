@@ -266,3 +266,69 @@ body {
   background-color: #d9534f;
   color: #fff;
 }
+/* ---------------------------------- */
+/* Responsivo: ajustes não destrutivos */
+/* ---------------------------------- */
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.envlope-wrapper {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  height: auto;
+}
+
+#envelope {
+  top: 0;
+}
+
+.reset {
+  margin-top: 12px; /* aproximar do envelope */
+}
+
+@media (max-width: 480px) {
+  .envlope-wrapper {
+    padding: 16px;
+  }
+  #envelope {
+    transform: scale(0.85);
+    transform-origin: center top;
+  }
+  .reset {
+    margin-top: 12px;
+  }
+  .reset button {
+    font-size: 1rem;
+    padding: 0.65rem 1rem;
+    min-width: 140px;
+  }
+  .words.line2,
+  .words.line3,
+  .words.line4 {
+    font-size: 0.95rem;
+  }
+  .words.line1 {
+    font-size: 0.65rem;
+    width: 30%;
+  }
+}
+
+@media (max-width: 360px) {
+  #envelope {
+    transform: scale(0.75);
+  }
+  .words.line2,
+  .words.line3,
+  .words.line4 {
+    font-size: 0.9rem;
+  }
+}
