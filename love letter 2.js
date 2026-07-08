@@ -1,22 +1,70 @@
 $(document).ready(function () {
   var envelope = $("#envelope");
-  var btn_open = $("#open");
-  var btn_reset = $("#reset");
+  var senhaInput = $("#senha");
+  var SENHA_CORRETA = "milena";
+  var desbloqueado = false;
 
-  envelope.click(function () {
-    open();
-  });
-  btn_open.click(function () {
-    open();
-  });
-  btn_reset.click(function () {
-    close();
-  });
+  function senhaValida() {
+    var digitada = (senhaInput.val() || "").trim().toLowerCase();
+    return digitada !== "" && digitada === SENHA_CORRETA.toLowerCase();
+  }
 
   function open() {
-    envelope.addClass("open").removeClass("close");
+    if (!senhaValida() && !desbloqueado) {
+      return false;
+    }
+    desbloqueado = true;
+    senhaInput.removeClass("error");
+    envelope.addClass("open").removeClass("close locked");
+    senhaInput.prop("disabled", true).attr("placeholder", "Aberto com amor");
+    return true;
   }
-  function close() {
-    envelope.addClass("close").removeClass("open");
+
+  function mostrarErro() {
+    senhaInput.removeClass("error shake");
+    // Força reflow para a animação rodar novamente se já estava
+    void senhaInput[0].offsetWidth;
+    senhaInput.addClass("error shake");
+    senhaInput.focus();
   }
+
+  function tentarAbrir() {
+    if (desbloqueado) {
+      return;
+    }
+    if (!senhaValida()) {
+      mostrarErro();
+      return;
+    }
+    open();
+  }
+
+  envelope.addClass("locked");
+
+  envelope.on("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (desbloqueado) {
+      return;
+    }
+    if (senhaValida()) {
+      open();
+    } else {
+      senhaInput.focus();
+    }
+  });
+
+  senhaInput.on("input", function () {
+    senhaInput.removeClass("error shake");
+    if (senhaValida()) {
+      open();
+    }
+  });
+
+  senhaInput.on("keydown", function (e) {
+    if (e.which === 13 || e.key === "Enter") {
+      e.preventDefault();
+      tentarAbrir();
+    }
+  });
 });
