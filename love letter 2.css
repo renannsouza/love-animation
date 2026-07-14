@@ -7,8 +7,8 @@
   margin-left: auto;
   margin-right: auto;
   top: 300px;
-  background-color: #d9534f; /* Warm romantic red */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  background-color: #e86b79; /* Rosa escuro/cereja claro */
+  box-shadow: 0 10px 40px rgba(217, 83, 79, 0.3); /* Sombra mais ampla e suave */
 }
 
 .front {
@@ -23,16 +23,16 @@
   border-right: 140px solid transparent;
   border-bottom: 82px solid transparent;
   /* a little smaller */
-  border-top: 98px solid #d9534f;
+  border-top: 98px solid #e86b79; /* Combina com o novo envelope */
   /* a little larger */
   transform-origin: top;
   pointer-events: none;
 }
 
 .pocket {
-  border-left: 140px solid #e6001f; /* Soft pinkish red for the pocket */
-  border-right: 140px solid #e6001f;
-  border-bottom: 90px solid #e6001f; /* Lighter romantic red */
+  border-left: 140px solid #f28290; /* Um tom ligeiramente mais claro para profundidade */
+  border-right: 140px solid #f28290;
+  border-bottom: 90px solid #f28290;
   border-top: 90px solid transparent;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
@@ -40,14 +40,14 @@
 
 .letter {
   position: relative;
-  background-color: #fff;
+  background-color: #faf8f5; /* Off-white pergaminho suave */
   width: 90%;
   margin-left: auto;
   margin-right: auto;
   height: 90%;
   top: 5%;
   border-radius: 6px;
-  box-shadow: 0 2px 26px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   font-family: "Dancing Script", cursive;
 }
 
@@ -65,33 +65,37 @@
   left: 10%;
   width: 80%;
   height: 14%;
-  background-color: #ffe6e6; /* Light romantic tone */
+  background-color: transparent; /* Removemos o fundo bloco */
+  color: #5a3c42; /* Cor cinza/vinho escuro elegante */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .words.line1 {
-  top: 10%;
-  font-size: 0.5rem;
-  width: 20%;
-  height: 7%;
-  font-size: 0.7rem;
+  top: 15%;
+  font-size: 1.1rem;
+  width: 80%; /* Ajustado para centralizar com o texto completo */
+  height: auto;
 }
 
 .words.line2 {
-  top: 30%;
-  text-align: center;
-  font-size: 1.1rem;
+  top: 35%;
+  font-size: 1.2rem;
+  height: auto;
 }
 
 .words.line3 {
   top: 50%;
   font-size: 1.1rem;
-  text-align: center;
+  height: auto;
 }
 
 .words.line4 {
   top: 70%;
-  font-size: 1.1rem;
-  text-align: center;
+  font-size: 1.2rem;
+  height: auto;
 }
 
 .open .flap {
@@ -112,10 +116,20 @@
   z-index: 1;
 }
 
+/* Impede ver o conteúdo da carta enquanto está fechado/trancado */
+.close .letter .words,
+.locked .letter .words {
+  visibility: hidden;
+}
+
 .open .letter {
   transform: translateY(-140px);
   transition: transform 0.4s 0.6s ease, z-index 0.6s;
   z-index: 2;
+}
+
+.open .letter .words {
+  visibility: visible;
 }
 
 .hearts {
@@ -229,7 +243,7 @@
   }
 }
 body {
-  background-color: #f0e6f6; /* Soft lavender for a romantic, dreamy feel */
+  background-color: #fff0f5; /* Rosa bem clarinho minimalista */
 }
 
 .envlope-wrapper {
@@ -238,33 +252,59 @@ body {
 
 .reset {
   text-align: center;
-  margin-top: 120px; /* ajuste aqui conforme desejar */
+  margin-top: 120px;
 }
 
-.reset button {
-  font-weight: 800;
-  font-style: normal;
-  transition: all 0.1s linear;
-  -webkit-appearance: none;
-  background-color: transparent;
-  border: solid 2px #d9534f;
-  border-radius: 4px;
-  color: #e92720;
-  display: inline-block;
-  font-size: 14px;
-  text-transform: uppercase;
-  /* margin-top: 20px; */
-  margin: 5px;
-  padding: 10px;
-  line-height: 1em;
-  text-decoration: none;
-  min-width: 120px;
-  cursor: pointer;
+.reset input#senha {
+  display: block;
+  margin: 5px auto;
+  padding: 12px 24px;
+  min-width: 250px;
+  border: 1px solid transparent;
+  border-radius: 50px; /* Formato pílula */
+  color: #722f37; /* Vinho / Bordô */
+  font-size: 15px;
+  text-align: center;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 15px rgba(217, 83, 79, 0.1);
+  transition: all 0.3s ease;
 }
 
-.reset button:hover {
-  background-color: #d9534f;
-  color: #fff;
+.reset input#senha::placeholder {
+  color: #a98b90;
+}
+
+.reset input#senha:focus {
+  background-color: #ffffff;
+  box-shadow: 0 6px 20px rgba(217, 83, 79, 0.2);
+  transform: translateY(-2px);
+}
+
+.reset input#senha.error {
+  border: 1px solid #d9534f;
+  color: #d9534f;
+  background-color: #fff;
+}
+
+.reset input#senha:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Animação para senha errada */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  50% { transform: translateX(8px); }
+  75% { transform: translateX(-8px); }
+  100% { transform: translateX(0); }
+}
+
+.shake {
+  animation: shake 0.4s ease-in-out;
 }
 /* ---------------------------------- */
 /* Responsivo: ajustes não destrutivos */
@@ -305,11 +345,6 @@ body {
   }
   .reset {
     margin-top: 12px;
-  }
-  .reset button {
-    font-size: 1rem;
-    padding: 0.65rem 1rem;
-    min-width: 140px;
   }
   .words.line2,
   .words.line3,
