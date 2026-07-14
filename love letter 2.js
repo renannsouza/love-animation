@@ -1,7 +1,7 @@
 $(document).ready(function () {
   var envelope = $("#envelope");
   var senhaInput = $("#senha");
-  var SENHA_CORRETA = "monster";
+  var SENHA_CORRETA = "sushi";
   var desbloqueado = false;
 
   function senhaValida() {
