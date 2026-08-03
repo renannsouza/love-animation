@@ -60,42 +60,32 @@
   right: 0;
 }
 
-.words {
+.letter-content {
   position: absolute;
+  top: 12%;
   left: 10%;
   width: 80%;
-  height: 14%;
-  background-color: transparent; /* Removemos o fundo bloco */
+  z-index: 1;
   color: #5a3c42; /* Cor cinza/vinho escuro elegante */
-  display: flex;
-  align-items: center;
-  justify-content: center;
   text-align: center;
 }
 
-.words.line1 {
-  top: 15%;
+.letter-title {
   font-size: 1.1rem;
-  width: 80%; /* Ajustado para centralizar com o texto completo */
-  height: auto;
+  margin-bottom: 8px;
 }
 
-.words.line2 {
-  top: 35%;
-  font-size: 1.2rem;
-  height: auto;
+.message-list {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 1rem;
+  line-height: 1.15;
+  text-align: left;
 }
 
-.words.line3 {
-  top: 50%;
-  font-size: 1.1rem;
-  height: auto;
-}
-
-.words.line4 {
-  top: 70%;
-  font-size: 1.2rem;
-  height: auto;
+.message-list li {
+  margin-bottom: 5px;
+  padding-left: 2px;
 }
 
 .open .flap {
@@ -117,8 +107,8 @@
 }
 
 /* Impede ver o conteúdo da carta enquanto está fechado/trancado */
-.close .letter .words,
-.locked .letter .words {
+.close .letter .letter-content,
+.locked .letter .letter-content {
   visibility: hidden;
 }
 
@@ -128,7 +118,7 @@
   z-index: 2;
 }
 
-.open .letter .words {
+.open .letter .letter-content {
   visibility: visible;
 }
 
@@ -346,14 +336,11 @@ body {
   .reset {
     margin-top: 12px;
   }
-  .words.line2,
-  .words.line3,
-  .words.line4 {
+  .message-list {
     font-size: 0.95rem;
   }
-  .words.line1 {
-    font-size: 0.65rem;
-    width: 30%;
+  .letter-title {
+    font-size: 1rem;
   }
 }
 
@@ -361,9 +348,7 @@ body {
   #envelope {
     transform: scale(0.75);
   }
-  .words.line2,
-  .words.line3,
-  .words.line4 {
+  .message-list {
     font-size: 0.9rem;
   }
 }
